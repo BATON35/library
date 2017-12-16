@@ -24,57 +24,50 @@ import java.util.stream.Stream;
 
 public class MainWindowController {
 
-    @FXML
-    private TableView<KsiazkaView> ksiazkiTableView;
-    @FXML
-    private TableColumn<KsiazkaView, String> idColumn;
-    @FXML
-    private TableColumn<KsiazkaView, String> tytulColumn;
+  @FXML private TableView<KsiazkaView> ksiazkiTableView;
+  @FXML private TableColumn<KsiazkaView, String> idColumn;
+  @FXML private TableColumn<KsiazkaView, String> tytulColumn;
+  @FXML private TableColumn<KsiazkaView, String> autorColumn;
+  @FXML private TableColumn<KsiazkaView, String> statusColumn;
 
-    @FXML
-    private TableColumn<KsiazkaView, String> autorColumn;
+  public void initTableView() {
+    idColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<KsiazkaView, String>, ObservableValue<String>>() {
+      public ObservableValue<String> call(TableColumn.CellDataFeatures<KsiazkaView, String> p) {
+        return p.getValue().idProperty();
+      }
+    });
+    tytulColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<KsiazkaView, String>, ObservableValue<String>>() {
+      public ObservableValue<String> call(TableColumn.CellDataFeatures<KsiazkaView, String> p) {
+        return p.getValue().tytulProperty();
+      }
+    });
+    autorColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<KsiazkaView, String>, ObservableValue<String>>() {
+      public ObservableValue<String> call(TableColumn.CellDataFeatures<KsiazkaView, String> p) {
+        return p.getValue().autorProperty();
+      }
+    });
+    statusColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<KsiazkaView, String>, ObservableValue<String>>() {
+      public ObservableValue<String> call(TableColumn.CellDataFeatures<KsiazkaView, String> p) {
+        return p.getValue().statusProperty();
+      }
+    });
+  }
 
-    @FXML
-    private TableColumn<KsiazkaView, String> statusColumn;
-
-    public void initTableView() {
-        idColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<KsiazkaView, String>, ObservableValue<String>>() {
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<KsiazkaView, String> p) {
-                return p.getValue().idProperty();
-            }
-        });
-        tytulColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<KsiazkaView, String>, ObservableValue<String>>() {
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<KsiazkaView, String> p) {
-                return p.getValue().tytulProperty();
-            }
-        });
-        autorColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<KsiazkaView, String>, ObservableValue<String>>() {
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<KsiazkaView, String> p) {
-                return p.getValue().autorProperty();
-            }
-        });
-        statusColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<KsiazkaView, String>, ObservableValue<String>>() {
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<KsiazkaView, String> p) {
-                return p.getValue().statusProperty();
-            }
-        });
-    }
-
-    public void loadValues() {
-        List<Ksiazka> ksiazkiModel = Magazyn.getBiblioteka().getKsiazki();
-        Biblioteka biblioteka = Magazyn.getBiblioteka();
-        List<KsiazkaView> ksiazki = new ArrayList<>();
-        for (Ksiazka ksiazka : ksiazkiModel) {
-            String status;
-            if (biblioteka.czyKsiazkaJestDostepna(ksiazka)) {
-                status = "Dostępna";
-            } else {
-                status = "Wypożyczona";
-            }
+  public void loadValues() {
+    List<Ksiazka> ksiazkiModel = Magazyn.getBiblioteka().getKsiazki();
+    Biblioteka biblioteka = Magazyn.getBiblioteka();
+    List<KsiazkaView> ksiazki = new ArrayList<>();
+    for (Ksiazka ksiazka : ksiazkiModel){
+      String status;
+      if (biblioteka.czyKsiazkaJestDostepna(ksiazka)){
+        status = "Dostępna";
+      }else{
+        status = "Wypożyczona";
+      }
 //      String statusDostepnosci = biblioteka.czyKsiazkaJestDostepna(ksiazka) ? "Dostępna" : "Wypożyczona";
-            KsiazkaView k = new KsiazkaView(Integer.toString(ksiazka.getId()), ksiazka.getTytul(), ksiazka.getAutor().toString(), status);
-            ksiazki.add(k);
-        }
+      KsiazkaView k = new KsiazkaView(Integer.toString(ksiazka.getId()), ksiazka.getTytul(), ksiazka.getAutor().toString(), status);
+      ksiazki.add(k);
+    }
 
 
 //    KsiazkaView k1 = new KsiazkaView("1", "Pan Tadeusz", "Adam Mickiewicz", "Dostępna");
@@ -82,52 +75,39 @@ public class MainWindowController {
 //    KsiazkaView k3 = new KsiazkaView("3", "Pan Tadeusz v3", "Adam Mickiewicz", "Wypożyczona");
 //    KsiazkaView k4 = new KsiazkaView("4", "Pan Tadeusz v4", "Adam Mickiewicz", "Dostępna");
 //    List<KsiazkaView> ksiazki = Stream.of(k1, k2, k3, k4).collect(Collectors.toList());
-        ObservableList<KsiazkaView> ksiazkiView = FXCollections.observableArrayList(ksiazki);
-        ksiazkiTableView.setItems(ksiazkiView);
-    }
+    ObservableList<KsiazkaView> ksiazkiView = FXCollections.observableArrayList(ksiazki);
+    ksiazkiTableView.setItems(ksiazkiView);
+  }
 
-    public void otworzOknoDodawaniaNowejKsiazki() {
-        Stage stage = new Stage();
-        Parent root = null;
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/DodajKsiazke.fxml"));
-            root = loader.load();
-            Scene scene = new Scene(root);
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+  public void otworzOknoDodawaniaNowejKsiazki(){
+    Stage stage = new Stage();
+    Parent root = null;
+    try {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("/DodajKsiazke.fxml"));
+      root = loader.load();
+      Scene scene = new Scene(root);
+      stage.initModality(Modality.APPLICATION_MODAL);
+      stage.setScene(scene);
+      stage.show();
+    } catch (IOException e) {
+      e.printStackTrace();
     }
+  }
 
-    public void otworzOknoDodawaniaNowegUzytkownika() {
-        Stage stage = new Stage();
-        Parent root = null;
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/DodajUzytkownika.fxml"));
-            root = loader.load();
-            Scene scene = new Scene(root);
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+  public void otworzOknoDodawaniaNowegoUzytkownika(){
+    Parent root = null;
+    Stage stage = new Stage();
+    Magazyn.getBiblioteka();
+    try {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("/DodajUzytkownika.fxml"));
+      root = loader.load();
+      Scene scene = new Scene(root);
+      stage.initModality(Modality.APPLICATION_MODAL);
+      stage.setScene(scene);
+      stage.show();
+    } catch (IOException e) {
+      e.printStackTrace();
     }
-    public void otworzOknoInformacjeOUzytkowniku(){
-        Stage stage = new Stage();
-        Parent root = null;
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/WyswietlDaneOUzytkowniku.fxml"));
-            root = loader.load();
-            Scene scene = new Scene(root);
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+  }
 
 }
