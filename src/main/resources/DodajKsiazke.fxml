@@ -27,13 +27,10 @@
       <Button fx:id="zapiszButton" layoutX="441.0" layoutY="355.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="133.0" text="Zapisz" />
       <HBox alignment="CENTER" layoutX="29.0" layoutY="189.0" prefHeight="33.0" prefWidth="568.0">
          <children>
-            <RadioButton fx:id="gatunekDramat" mnemonicParsing="false" prefHeight="17.0" prefWidth="106.0" selected="true" text="Dramat">
-               <toggleGroup>
-                  <ToggleGroup fx:id="Gatunek" />
-               </toggleGroup></RadioButton>
-            <RadioButton fx:id="gatunekHorror" mnemonicParsing="false" prefHeight="17.0" prefWidth="106.0" selected="true" text="Horror" toggleGroup="$Gatunek" />
-            <RadioButton fx:id="gatunekBajka" mnemonicParsing="false" prefHeight="17.0" prefWidth="93.0" selected="true" text="Bajka" toggleGroup="$Gatunek" />
-            <RadioButton fx:id="gatunekKryminal" mnemonicParsing="false" prefHeight="17.0" prefWidth="112.0" selected="true" text="Kryminał" toggleGroup="$Gatunek" />
+            <RadioButton fx:id="gatunekDramat" mnemonicParsing="false" prefHeight="17.0" prefWidth="106.0" text="Dramat" />
+            <RadioButton fx:id="gatunekHorror" mnemonicParsing="false" prefHeight="17.0" prefWidth="106.0" text="Horror" />
+            <RadioButton fx:id="gatunekBajka" mnemonicParsing="false" prefHeight="17.0" prefWidth="93.0" text="Bajka" />
+            <RadioButton fx:id="gatunekKryminal" mnemonicParsing="false" prefHeight="17.0" prefWidth="112.0" text="Kryminał" />
          </children>
       </HBox>
    </children>
