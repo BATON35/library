@@ -11,7 +11,7 @@
       <VBox prefHeight="400.0" prefWidth="178.0">
          <children>
             <Button mnemonicParsing="false" onAction="#otworzOknoDodawaniaNowejKsiazki" prefHeight="25.0" prefWidth="147.0" text="Dodaj książkę" />
-            <Button mnemonicParsing="false" onAction="#otworzOknoDodawaniaNowegUzytkownika" prefHeight="25.0" prefWidth="147.0" text="Dodaj użytkownika" />
+            <Button mnemonicParsing="false" onAction="#otworzOknoDodawaniaNowegoUzytkownika" prefHeight="25.0" prefWidth="147.0" text="Dodaj użytkownika" />
             <Button mnemonicParsing="false" onAction="#otworzOknoInformacjeOUzytkowniku" prefHeight="25.0" prefWidth="145.0" text="User info" />
            
          </children>

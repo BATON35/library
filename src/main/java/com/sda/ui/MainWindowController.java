@@ -109,5 +109,19 @@ public class MainWindowController {
       e.printStackTrace();
     }
   }
+  public void otworzOknoInformacjeOUzytkowniku(){
+    Parent root = null;
+    Stage stage = new Stage();
+    Magazyn.getBiblioteka();
+    try {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("/WyswietlDaneOUzytkowniku.fxml"));
+      root = loader.load();
+      Scene scene = new Scene(root);
+      stage.initModality(Modality.APPLICATION_MODAL);
+      stage.setScene(scene);
+      stage.show();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
-}
+}}
