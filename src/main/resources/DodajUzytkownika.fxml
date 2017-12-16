@@ -9,7 +9,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label alignment="CENTER" contentDisplay="TOP" prefHeight="36.0" prefWidth="600.0" text="FORMULARZ DODWANIA NOWEGO UŻYTKOWNIKA" />
@@ -22,8 +21,11 @@
       <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="84.0" text="Podaj płeć:" />
       <HBox alignment="CENTER" prefHeight="35.0" prefWidth="600.0">
          <children>
-            <RadioButton fx:id="plecKobieta" mnemonicParsing="false" text="Kobieta" />
-            <RadioButton fx:id="plecMezczyzna" mnemonicParsing="false" text="Mężczyzna" />
+            <RadioButton fx:id="plecKobieta" mnemonicParsing="false" selected="true" text="Kobieta">
+               <toggleGroup>
+                  <ToggleGroup fx:id="plec" />
+               </toggleGroup></RadioButton>
+            <RadioButton fx:id="plecMezczyzna" mnemonicParsing="false" selected="true" text="Mężczyzna" toggleGroup="$plec" />
          </children>
       </HBox>
       <HBox alignment="CENTER" prefHeight="35.0" prefWidth="600.0">
